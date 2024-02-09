@@ -1,0 +1,11 @@
+{
+    "name": "boilerplate tf workflow",
+    "description": "boilerplate tf workflow",
+    "iconName": "example-icon",
+    "categories": [
+        "Terraform"
+    ],
+    "filePatterns": [
+        ".*\\.tf$"
+    ]
+}
