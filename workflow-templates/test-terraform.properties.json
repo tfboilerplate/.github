@@ -1,1 +1,11 @@
-
+{
+    "name": "boilerplate tf test workflow",
+    "description": "boilerplate tf test workflow",
+    "iconName": "example-icon",
+    "categories": [
+        "Terraform"
+    ],
+    "filePatterns": [
+        ".*\\.tf$"
+    ]
+}
