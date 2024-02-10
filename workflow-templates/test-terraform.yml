@@ -1,17 +1,29 @@
 name: Test Terraform changes
 
-defaults:
-  run:
-    working-directory: terraform
-
 on: 
-  workflow_dispatch:
-  push:
-    paths:
-      - terraform/**
-
-env:
-  ENVIRONMENT : "dev"
+  workflow_call:
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+        type: string
+      AZURE_TENANT_ID:
+        required: true
+        type: string
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+        type: string
+      STORAGE_ACCOUNT:
+        required: true
+        type: string
+      CONTAINER_NAME:
+        required: true
+        type: string
+      RESOURCE_GROUP:
+        required: true
+        type: string
+      RESOURCE_GROUP:
+        required: true
+        type: string
 
 permissions:
   id-token: write
@@ -37,7 +49,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
-        run: terraform init -backend-config=backend.hcl -backend-config="key=${{ env.ENVIRONMENT }}/atlas-eks.tfstate"
+        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP" -backend-config="key=app.terraform.tfstate"
 
       - name: Terraform Validate
         run: terraform validate
